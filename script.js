@@ -8,7 +8,7 @@ async function fetchNews(query){
     const data=await result.json();
     console.log(data.articles.length);
     let ele=document.querySelector('.no');
-    if(data.articles.length==0){
+    if(data && data.artciles && data.articles.length==0){
         let head=document.createElement('h1');
         head.setAttribute('class','no');
         let search=document.querySelector('.bar');
@@ -23,7 +23,7 @@ async function fetchNews(query){
         const relevance=relevent(article,query);
         return{...article,relevance};
     })
-    articles.sort((a,b)=> a.relevance>b.relevance);
+    articles.sort((a,b)=> b.relevance-a.relevance);
     bindData(articles);
 }
 
