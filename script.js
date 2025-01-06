@@ -5,7 +5,12 @@ const url="https://newsapi.org/v2/everything?q=";
 window.addEventListener("load",()=> fetchNews('Latest'));
 
 async function fetchNews(query){
-    const result=await fetch(`${proxyUrl}${url}${query}&from=2025-01-01&apiKey=${API_KEY}`);
+    const result = await fetch(`${proxyUrl}${url}${query}&from=2025-01-01&apiKey=${API_KEY}`, {
+        method: 'GET',
+        headers: {
+            'Origin': window.location.origin // Add the Origin header
+        }
+    });
     const data=await result.json();
     console.log(data.articles.length);
     let ele=document.querySelector('.no');
