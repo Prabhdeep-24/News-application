@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.flex{
+    display: flex;
+}
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding:20px;
+    background-color:black;
+    box-shadow: 0px 0px 4px #bbd0e2;
+    position:sticky;
+    left:0;
+    right: 0;
+    color:white;
+}
+#logo{
+    height: 40px;
+    width: 50px;
+}
+.genre{
+    display: flex;
+    gap:40px;
+}
+.genre li{
+    font-weight: bold;
+    color:white;
+    list-style-type: none;
+    font-family: 'Courier New', Courier, monospace;
+}
+.genre li:hover{
+    color:grey;
+    cursor: pointer;
+}
+.genre li:active{
+    color:red;
+    cursor: pointer;
+
+}
+.bar{
+    border:2px solid #bbd0e2;
+    height: 30px;
+    padding:12px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',"Geneva", Verdana, sans-serif;
+}
+.bar:active{
+    border:2px solid rgb(36, 36, 222);
+}
+#btn{
+    margin-left: 10px;
+    background-color: rgb(57, 57, 218);
+    color:white;
+    border:none;
+    border-radius: 10%;
+    height: 30px;
+    width: 70px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+}
+#btn:hover{
+    cursor: pointer;
+    background-color: blue;
+}
+.main{
+    padding:20px;
+    margin-top:80px;
+}
+.cards-container{
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: start;
+    /* row-gap: 20px; */
+    gap:30px;
+    margin:0px 100px;
+    
+}
+.card{
+    width:360px;
+    min-height: 400px;
+    box-shadow: 0px 0px 4px #d4ecff;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    overflow: hidden;
+}
+.card:hover{
+    box-shadow: 1px 1px 8px #b0cde4;
+    background-color: #f9fdff;
+    transform: translateY(-2px)
+    /* size:2x; */
+}
+.news-content{
+    padding:12px;
+}
+#source{
+    /* margin:12px; */
+    padding-top:10px;
+}
+#news-img{
+    height:150px;
+    width:360px;
+}
+.description{
+    padding-top:10px;
+    font-family:'Poppins';
+    color:rgb(66, 96, 177);
+}
+.genre .active{
+    color: rgb(55, 48, 198);
+    text-decoration: underline;
+}
+h1{
+    font-family: 'poppins';
+}
