@@ -42,7 +42,7 @@ function relevent(article,query){
 function bindData(articles){
     const container=document.querySelector('.cards-container');
     const template=document.querySelector('template');
-    
+    container.innerHTML="";
     articles.forEach(article => {
         if(!article.image) return;
         const card=template.content.cloneNode(true); //clones all the elemnts inside it (deep cloning)
