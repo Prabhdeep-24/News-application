@@ -1,20 +1,15 @@
-const API_KEY="e4c41261bf61465784b5fcf6a64331a4";
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-const url="https://newsapi.org/v2/everything?q=";
+const API_KEY="301cdd3e29c422dc78df000fb955a3e4";
+const url="https://gnews.io/api/v4/search?q="
 
 window.addEventListener("load",()=> fetchNews('Latest'));
 
 async function fetchNews(query){
-    const result = await fetch(`${proxyUrl}${url}${query}&from=2025-01-01&apiKey=${API_KEY}`, {
-        method: 'GET',
-        headers: {
-            'Origin': window.location.origin // Add the Origin header
-        }
-    });
+
+    const result = await fetch(`${url}${query}&lang=en&country=in&apikey=${API_KEY}`);
     const data=await result.json();
-    console.log(data.articles.length);
+    console.log(data.articles);
     let ele=document.querySelector('.no');
-    if(data && data.artciles && data.articles.length==0){
+    if(data.articles.length==0){
         let head=document.createElement('h1');
         head.setAttribute('class','no');
         let search=document.querySelector('.bar');
@@ -47,10 +42,9 @@ function relevent(article,query){
 function bindData(articles){
     const container=document.querySelector('.cards-container');
     const template=document.querySelector('template');
-    container.innerHTML="";
     
     articles.forEach(article => {
-        if(!article.urlToImage) return;
+        if(!article.image) return;
         const card=template.content.cloneNode(true); //clones all the elemnts inside it (deep cloning)
         fillData(card,article);
         container.appendChild(card);
@@ -63,12 +57,11 @@ function fillData(card,article){
     let title=card.querySelector('.title');
     let source=card.querySelector('#source');
     let desc=card.querySelector('.description');
-    let type=card.querySelector('#type');
     let cardele=card.querySelector('.card');
     const date=new Date(article.publishedAt).toLocaleString('en-US',{
         timeZone: 'Asia/Jakarta',
     });
-    img.src=article.urlToImage;
+    img.src=article.image;
     title.innerHTML=article.title;
     desc.innerHTML=article.description;
     source.innerHTML=`${article.source.name}: ${date}`;
