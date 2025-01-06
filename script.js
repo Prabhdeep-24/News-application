@@ -6,9 +6,9 @@ window.addEventListener("load",()=> fetchNews('Latest'));
 async function fetchNews(query){
     const result=await fetch(`${url}${query}&from=2025-01-01&apiKey=${API_KEY}`);
     const data=await result.json();
-    console.log(data.articles.length);
+    console.log(data);
     let ele=document.querySelector('.no');
-    if(data && data.artciles && data.articles.length==0){
+    if(data.totalResults==0){
         let head=document.createElement('h1');
         head.setAttribute('class','no');
         let search=document.querySelector('.bar');
@@ -23,7 +23,7 @@ async function fetchNews(query){
         const relevance=relevent(article,query);
         return{...article,relevance};
     })
-    articles.sort((a,b)=> b.relevance-a.relevance);
+    articles.sort((a,b)=> a.relevance>b.relevance);
     bindData(articles);
 }
 
