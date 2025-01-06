@@ -6,15 +6,36 @@ window.addEventListener("load",()=> fetchNews('Latest'));
 async function fetchNews(query){
     const result=await fetch(`${url}${query}&from=2025-01-01&sortBy=latest&popularity&apiKey=${API_KEY}`);
     const data=await result.json();
-    if(data.totalResults==0){
+    console.log(data.articles.length);
+    let ele=document.querySelector('.no');
+    if(data.articles.length==0){
         let head=document.createElement('h1');
+        head.setAttribute('class','no');
         let search=document.querySelector('.bar');
         head.innerHTML=`No news found related to title ${search.value}`
         let main=document.querySelector('.main');
         main.appendChild(head);
     }
-    console.log(data);
-    bindData(data.articles);
+    else if(ele){
+        ele.remove();
+    }
+    const articles=data.articles.map(article=>{
+        const relevance=relevent(article,query);
+        return{...article,relevance};
+    })
+    articles.sort((a,b)=> a.relevance>b.relevance);
+    bindData(articles);
+}
+
+//to calculate the relevance of the news with the topic
+function relevent(article,query){
+    if(!article.title || !article.description) return 0;
+    let topic=query.toLowerCase();
+    let title=article.title.toLowerCase();
+    let desc=article.description.toLowerCase();
+
+    const score=(title.includes(topic)?1:0)+(desc.includes(topic)?1:0);
+    return score;
 }
 
 function bindData(articles){
@@ -36,6 +57,7 @@ function fillData(card,article){
     let title=card.querySelector('.title');
     let source=card.querySelector('#source');
     let desc=card.querySelector('.description');
+    let type=card.querySelector('#type');
     let cardele=card.querySelector('.card');
     const date=new Date(article.publishedAt).toLocaleString('en-US',{
         timeZone: 'Asia/Jakarta',
@@ -47,6 +69,7 @@ function fillData(card,article){
     cardele.addEventListener('click',function(){
         window.open(article.url,'_blanck');
     })
+
 }
 
 // list.forEach(genre=> {
