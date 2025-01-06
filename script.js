@@ -4,7 +4,7 @@ const url="https://newsapi.org/v2/everything?q=";
 window.addEventListener("load",()=> fetchNews('Latest'));
 
 async function fetchNews(query){
-    var req=new Request(`${url}${query}&from=2025-01-01&sortBy=popularity&apiKey=${API_KEY}`);
+    var req=new Request(`${url}${query}&from=2025-01-01&apiKey=${API_KEY}`);
     const result=await fetch(req);
     const data=await result.json();
     console.log(data.articles.length);
